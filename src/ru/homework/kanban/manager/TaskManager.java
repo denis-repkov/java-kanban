@@ -1,8 +1,8 @@
-package canban.manager;
+package ru.homework.kanban.manager;
 
-import canban.tasks.Task;
-import canban.tasks.Subtask;
-import canban.tasks.Epic;
+import ru.homework.kanban.tasks.Task;
+import ru.homework.kanban.tasks.Subtask;
+import ru.homework.kanban.tasks.Epic;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -181,6 +181,8 @@ public class TaskManager {
             epic.setStatus("IN_PROGRESS");
             return;
         }
+
+        epic.setStatus(status);
 
         for (int id : epicSubs) {
             final Subtask subtask = subtasks.get(id);

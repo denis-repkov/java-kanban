@@ -1,4 +1,4 @@
-package canban.tasks;
+package ru.homework.kanban.tasks;
 
 public class Subtask extends Task {
     protected int epicId;
@@ -31,10 +31,10 @@ public class Subtask extends Task {
     public String toString() {
         return "Subtask{" +
                 "epicId=" + epicId +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", status='" + status + '\'' +
+                ", id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", description='" + getDescription() + '\'' +
+                ", status='" + getStatus() + '\'' +
                 '}';
     }
 }

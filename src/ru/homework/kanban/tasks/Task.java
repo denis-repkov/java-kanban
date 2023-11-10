@@ -1,12 +1,12 @@
-package canban.tasks;
+package ru.homework.kanban.tasks;
 
 import java.util.Objects;
 
 public class Task {
-    protected int id;
-    protected String name;
-    protected String description;
-    protected String status;
+    private int id;
+    private String name;
+    private String description;
+    private String status;
 
     public Task(int id, String name, String description, String status) {
         this.id = id;

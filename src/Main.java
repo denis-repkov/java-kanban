@@ -1,7 +1,7 @@
-import canban.manager.TaskManager;
-import canban.tasks.Epic;
-import canban.tasks.Subtask;
-import canban.tasks.Task;
+import ru.homework.kanban.manager.TaskManager;
+import ru.homework.kanban.tasks.Epic;
+import ru.homework.kanban.tasks.Subtask;
+import ru.homework.kanban.tasks.Task;
 
 public class Main {
 

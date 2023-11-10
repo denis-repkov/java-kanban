@@ -1,4 +1,4 @@
-package canban.tasks;
+package ru.homework.kanban.tasks;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -47,10 +47,10 @@ public class Epic extends Task {
     @Override
     public String toString() {
         return "Epic{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", status='" + status + '\'' +
+                "id=" + getId() +
+                ", name='" + getName() + '\'' +
+                ", description='" + getDescription() + '\'' +
+                ", status='" + getStatus() + '\'' +
                 ", subtaskIds=" + subtaskIds +
                 '}';
     }
