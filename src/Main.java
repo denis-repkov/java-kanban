@@ -37,6 +37,9 @@ public class Main {
         System.out.println(taskManager.getSubtask(8));
 
         System.out.println("\nПроверяем вывод истории просмотров...");
+        System.out.println(taskManager.getHistory());
+
+        System.out.println("\nДелаем накрутку истории просмотров и выводим историю снова...");
         taskManager.getSubtask(4);
         taskManager.getSubtask(5);
         taskManager.getSubtask(6);
@@ -46,9 +49,6 @@ public class Main {
         taskManager.getSubtask(10);
         taskManager.getEpic(7);
         taskManager.getTask(2);
-        System.out.println(taskManager.getHistory());
-
-        System.out.println("\nДелаем накрутку истории просмотров и выводим историю снова...");
         System.out.println(taskManager.getHistory());
 
 
