@@ -2,12 +2,12 @@ package ru.homework.kanban.manager;
 
 import ru.homework.kanban.tasks.Task;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class InMemoryHistoryManager implements HistoryManager {
 
-    private final List<Task> historyTask = new ArrayList<>();
+    private final LinkedList<Task> historyTask = new LinkedList<>();
 
     @Override
     public List<Task> getHistoryTask() {
@@ -16,7 +16,7 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public void addTask(Task task) {
-        if (historyTask.isEmpty() || historyTask.size() < 10) {
+        if (historyTask.size() < 10) {
             historyTask.add(task);
         } else {
             historyTask.remove(0);
