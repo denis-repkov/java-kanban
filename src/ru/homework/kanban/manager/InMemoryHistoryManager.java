@@ -3,7 +3,7 @@ package ru.homework.kanban.manager;
 import ru.homework.kanban.tasks.Task;
 
 import java.util.List;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -51,18 +51,22 @@ public class InMemoryHistoryManager implements HistoryManager {
     @Override
     public void removeTask(int id) {
         Node node = nodeMap.remove(id);
-        if (node.prev != null && node.next != null) { // для середины
-            node.prev.next = node.next;
-            node.next.prev = node.prev;
-        } else if (node.prev == null && node.next != null) { //для головы
-            first = node.next;
-            node.next.prev = null;
-        } else if (node.prev != null) { // для хвоста
-            last = node.prev;
-            node.prev.next = null;
-        } else {
-            first = null;
-            last = null;
+        if (node != null) {
+            final Node prev = node.prev;
+            final Node next = node.next;
+            if (prev != null && next != null) { // для середины
+                prev.next = next;
+                next.prev = prev;
+            } else if (prev == null && next != null) { //для головы
+                first = next;
+                next.prev = null;
+            } else if (prev != null) { // для хвоста
+                last = prev;
+                prev.next = null;
+            } else {
+                first = null;
+                last = null;
+            }
         }
     }
 
@@ -71,9 +75,6 @@ public class InMemoryHistoryManager implements HistoryManager {
         if (last == null) {
             first = node;
         } else {
-            if (first.next == null) {
-                first.next = node;
-            }
             last.next = node;
             node.prev = last;
         }
@@ -81,8 +82,8 @@ public class InMemoryHistoryManager implements HistoryManager {
         return node;
     }
 
-    private ArrayList<Task> getTasks() {
-        ArrayList<Task> historyTask = new ArrayList<>();
+    private LinkedList<Task> getTasks() {
+        LinkedList<Task> historyTask = new LinkedList<>();
         Node node = first;
         while (node != null) {
             historyTask.add(node.task);

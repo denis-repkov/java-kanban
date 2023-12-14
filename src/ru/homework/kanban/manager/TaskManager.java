@@ -4,23 +4,22 @@ import ru.homework.kanban.tasks.Epic;
 import ru.homework.kanban.tasks.Subtask;
 import ru.homework.kanban.tasks.Task;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface TaskManager {
-    ArrayList<Task> getTasks();
+    List<Task> getTasks();
 
-    ArrayList<Subtask> getSubtasks();
+    List<Subtask> getSubtasks();
 
-    ArrayList<Epic> getEpics();
+    List<Epic> getEpics();
 
-    ArrayList<Subtask> getEpicSubtasks(int epicId);
+    List<Subtask> getEpicSubtasks(int epicId);
 
     Task getTask(int id);
 
     Subtask getSubtask(int id);
 
-    Epic getEpic(int id);
+    Object getEpic(int id);
 
     int addNewTask(Task task);
 

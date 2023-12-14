@@ -1,3 +1,5 @@
+package ru.homework.kanban;
+
 import ru.homework.kanban.manager.Managers;
 import ru.homework.kanban.manager.TaskManager;
 import ru.homework.kanban.tasks.Epic;
@@ -17,11 +19,11 @@ public class Main {
         // добавляем задачи/эпики/подзадачи для теста
         taskManager.addNewTask(new Task("Задача-1", "Здесь описание задачи 1", NEW));
         taskManager.addNewTask(new Task("Задача-2", "Здесь описание задачи 2", NEW));
-        taskManager.addNewEpic(new Epic("Эпик-1", "Здесь описание эпика 1", NEW));
+        taskManager.addNewEpic(new Epic("Эпик-1", "Здесь описание эпика 1"));
         taskManager.addNewSubtask(new Subtask("Подзадача-1-1", "Здесь описание подзадачи 1-1", NEW, 3));
         taskManager.addNewSubtask(new Subtask("Подзадача-1-2", "Здесь описание подзадачи 1-2", NEW, 3));
         taskManager.addNewSubtask(new Subtask("Подзадача-1-3", "Здесь описание подзадачи 1-3", NEW, 3));
-        taskManager.addNewEpic(new Epic("Эпик-2", "Здесь описание эпика 1", NEW));
+        taskManager.addNewEpic(new Epic("Эпик-2", "Здесь описание эпика 1"));
         taskManager.addNewSubtask(new Subtask("Подзадача-2-1", "Здесь описание подзадачи 2-1", NEW, 7));
         taskManager.addNewSubtask(new Subtask("Подзадача-2-2", "Здесь описание подзадачи 2-2", NEW, 7));
         taskManager.addNewSubtask(new Subtask("Подзадача-2-3", "Здесь описание подзадачи 2-3", DONE, 7));
@@ -63,11 +65,12 @@ public class Main {
         taskManager.updateSubtask(new Subtask(4, "Подзадача-1-1", "Здесь описание подзадачи 1", DONE, 3));
         taskManager.updateSubtask(new Subtask(5, "Подзадача-2-4", "Была 1-2, стала 2-4", IN_PROGRESS, 7));
         System.out.println(taskManager.getSubtasks());
+
         System.out.println("\nВыводим снова список эпиков для проверки...");
         System.out.println(taskManager.getEpics());
 
         System.out.println("\nОбновляем данные по эпику и печатаем список эпиков для проверки...");
-        taskManager.updateEpic(new Epic(7, "Эпик-2", "Добавилась подзадача 2-4", NEW));
+        taskManager.updateEpic(new Epic(7, "Эпик-2", "Добавилась подзадача 2-4"));
         System.out.println(taskManager.getEpics());
 
         System.out.println("\nУдаляем задачу и печатаем список задач для проверки...");
