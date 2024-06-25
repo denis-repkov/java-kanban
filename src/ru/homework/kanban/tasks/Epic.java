@@ -15,11 +15,6 @@ public class Epic extends Task {
         super(name, description, TaskStatus.NEW);
     }
 
-    @Override
-    public boolean isEpic() {
-        return true;
-    }
-
     public void addSubtaskId(int id) {
         subtaskIds.add(id);
     }
@@ -37,6 +32,11 @@ public class Epic extends Task {
     }
 
     @Override
+    public TaskType getType() {
+        return TaskType.EPIC;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -49,6 +49,7 @@ public class Epic extends Task {
     public String toString() {
         return "Epic{" +
                 "id=" + getId() +
+                ", type=" + getType() +
                 ", name='" + getName() + '\'' +
                 ", description='" + getDescription() + '\'' +
                 ", status='" + getStatus() + '\'' +

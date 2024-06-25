@@ -21,16 +21,16 @@ public class Task {
         this.status = status;
     }
 
-    public boolean isEpic() {
-        return false;
-    }
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public TaskType getType() {
+        return TaskType.TASK;
     }
 
     public String getName() {
@@ -57,6 +57,16 @@ public class Task {
         this.status = status;
     }
 
+    public String toFileString() {
+        String[] string = {Integer.toString(getId()),
+                getType().toString(),
+                getName(),
+                getStatus().toString(),
+                getDescription(),
+                null};
+        return String.join(",", string);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -72,6 +82,7 @@ public class Task {
     public String toString() {
         return "Task{" +
                 "id=" + id +
+                ", type=" + TaskType.TASK +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", status='" + status + '\'' +
