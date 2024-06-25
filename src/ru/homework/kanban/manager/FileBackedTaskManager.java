@@ -25,6 +25,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         FileBackedTaskManager manager = new FileBackedTaskManager(Managers.getDefaultHistory(), file);
         int maxID = 0;
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file, StandardCharsets.UTF_8))) {
+            bufferedReader.readLine();
             while (bufferedReader.ready()) {
                 String line = bufferedReader.readLine();
                 if (line.isEmpty()) {
@@ -57,7 +58,7 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         return manager;
     }
 
-    public void save() {
+    private void save() {
         try {
             if (!Files.exists(file.toPath())) {
                 Files.createFile(file.toPath());
