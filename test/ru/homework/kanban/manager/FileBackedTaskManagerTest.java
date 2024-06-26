@@ -17,7 +17,6 @@ class FileBackedTaskManagerTest {
     TaskManager loadedManager;
     @AfterEach
 
-
     @Test
     @DisplayName("Сохраненные и загруженные задачи/эпики/подзадачи одинаковые")
     public void saveAndLoadedTaskAreEqual() {
@@ -28,9 +27,9 @@ class FileBackedTaskManagerTest {
         int subtaskId = manager.addNewSubtask(new Subtask("", "", TaskStatus.NEW, 2));
         manager.getSubtask(subtaskId);
         loadedManager = FileBackedTaskManager.loadFromFile(new File("resources/backupTasks.csv"));
-        assertEquals(manager.getTask(taskId).toString(), loadedManager.getTask(taskId).toString(), "Задачи не одинаковы");
-        assertEquals(manager.getEpic(epicId).toString(), loadedManager.getEpic(epicId).toString(), "Эпики не одинаковы");
-        assertEquals(manager.getSubtask(subtaskId).toString(), loadedManager.getSubtask(subtaskId).toString(), "Подзадачи не одинаковы");
+        assertEquals(manager.getTask(taskId), loadedManager.getTask(taskId), "Задачи не одинаковы");
+        assertEquals(manager.getEpic(epicId), loadedManager.getEpic(epicId), "Эпики не одинаковы");
+        assertEquals(manager.getSubtask(subtaskId), loadedManager.getSubtask(subtaskId), "Подзадачи не одинаковы");
     }
 
     @Test

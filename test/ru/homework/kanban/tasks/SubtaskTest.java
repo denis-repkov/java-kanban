@@ -7,7 +7,7 @@ import ru.homework.kanban.manager.TaskManager;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("Поздазача")
+@DisplayName("Подзадача")
 class SubtaskTest {
     TaskManager taskManager = Managers.getDefault();
 

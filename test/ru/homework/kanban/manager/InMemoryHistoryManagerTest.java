@@ -37,7 +37,7 @@ class InMemoryHistoryManagerTest {
     }
 
     @Test
-    @DisplayName("сохряняется 1 копия задачи")
+    @DisplayName("Сохряняется 1 копия задачи")
     public void shouldBe1CopyOfTask() {
         int taskId1 = taskManager.addNewTask(new Task("Task1", "1", TaskStatus.NEW));
         taskManager.getTask(taskId1);
