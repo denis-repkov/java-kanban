@@ -5,7 +5,6 @@ import java.io.File;
 public class Managers {
 
     public static TaskManager getDefault() {
-        new FileBackedTaskManager(getDefaultHistory());
         return FileBackedTaskManager.loadFromFile(new File("resources/backupTasks.csv"));
     }
 

@@ -80,8 +80,8 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             for (Subtask subtask : getSubtasks()) {
                 writer.write(subtask.toFileString() + "\n");
             }
-        } catch (ManagerException | IOException e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            throw new ManagerException("Ошибка при сохранении данных в файл!");
         }
     }
 
