@@ -63,7 +63,7 @@ public class Main {
 
         System.out.println("\nОбновляем данные по подзадачам и печатаем список подзадач для проверки...");
         taskManager.updateSubtask(new Subtask(4, "Подзадача-1-1", "Здесь описание подзадачи 1", DONE, 3));
-        taskManager.updateSubtask(new Subtask(5, "Подзадача-2-4", "Была 1-2, стала 2-4", IN_PROGRESS, 7));
+        taskManager.updateSubtask(new Subtask(5, "Подзадача-2-4", "Была 1-2 - стала 2-4", IN_PROGRESS, 7));
         System.out.println(taskManager.getSubtasks());
 
         System.out.println("\nВыводим снова список эпиков для проверки...");

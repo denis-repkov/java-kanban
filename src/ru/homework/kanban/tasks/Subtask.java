@@ -17,6 +17,21 @@ public class Subtask extends Task {
         return epicId;
     }
 
+    @Override
+    public String toFileString() {
+        String[] string = {Integer.toString(getId()),
+                getType().toString(),
+                getName(),
+                getStatus().toString(),
+                getDescription(),
+                Integer.toString(getEpicId())};
+        return String.join(",", string);
+    }
+
+    @Override
+    public TaskType getType() {
+        return TaskType.SUBTASK;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -32,6 +47,7 @@ public class Subtask extends Task {
         return "Subtask{" +
                 "epicId=" + epicId +
                 ", id=" + getId() +
+                ", type=" + getType() +
                 ", name='" + getName() + '\'' +
                 ", description='" + getDescription() + '\'' +
                 ", status='" + getStatus() + '\'' +
