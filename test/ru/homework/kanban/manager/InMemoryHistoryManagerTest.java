@@ -5,6 +5,8 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import ru.homework.kanban.tasks.*;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -22,11 +24,11 @@ class InMemoryHistoryManagerTest {
     @Test
     @DisplayName("В истории 3 объекта")
     public void shouldBe3Objects(){
-        int taskId1 = taskManager.addNewTask(new Task("Task1", "1", TaskStatus.NEW));
+        int taskId1 = taskManager.addNewTask(new Task("Task1", "1", TaskStatus.NEW, Duration.ofMinutes(0), LocalDateTime.now()));
         taskManager.getTask(taskId1);
         int epicId1 = taskManager.addNewEpic(new Epic("Epic1", "1"));
         Epic epic1 = (Epic) taskManager.getEpic(epicId1);
-        int subTaskId2 = taskManager.addNewSubtask(new Subtask("Subtask1", "1", TaskStatus.NEW, epic1.getId()));
+        int subTaskId2 = taskManager.addNewSubtask(new Subtask("Subtask1", "1", TaskStatus.NEW, epic1.getId(), Duration.ofMinutes(0), LocalDateTime.now()));
         taskManager.getSubtask(subTaskId2);
 
         List<Task> history = taskManager.getHistory();
@@ -39,7 +41,7 @@ class InMemoryHistoryManagerTest {
     @Test
     @DisplayName("Сохряняется 1 копия задачи")
     public void shouldBe1CopyOfTask() {
-        int taskId1 = taskManager.addNewTask(new Task("Task1", "1", TaskStatus.NEW));
+        int taskId1 = taskManager.addNewTask(new Task("Task1", "1", TaskStatus.NEW, Duration.ofMinutes(0), LocalDateTime.now()));
         taskManager.getTask(taskId1);
         taskManager.getTask(taskId1);
         taskManager.getTask(taskId1);
@@ -54,7 +56,7 @@ class InMemoryHistoryManagerTest {
     @Test
     @DisplayName("Задача исчезает из истории после удаления")
     public void disappearFromTheHistoryAfterDeletion() {
-        int taskId1 = taskManager.addNewTask(new Task(" ", " ", TaskStatus.NEW));
+        int taskId1 = taskManager.addNewTask(new Task(" ", " ", TaskStatus.NEW, Duration.ofMinutes(0), LocalDateTime.now()));
         taskManager.getTask(taskId1);
         taskManager.deleteTask(taskId1);
 

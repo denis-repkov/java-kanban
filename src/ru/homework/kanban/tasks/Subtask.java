@@ -1,10 +1,18 @@
 package ru.homework.kanban.tasks;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+
 public class Subtask extends Task {
     protected int epicId;
 
-    public Subtask(int id, String name, String description, TaskStatus status, int epicId) {
-        super(id, name, description, status);
+    public Subtask(int id, String name, String description, TaskStatus status, int epicId, Duration duration, LocalDateTime startTime) {
+        super(id, name, description, status, duration, startTime);
+        this.epicId = epicId;
+    }
+
+    public Subtask(String name, String description, TaskStatus status, int epicId, Duration duration, LocalDateTime startTime) {
+        super(name, description, status, duration, startTime);
         this.epicId = epicId;
     }
 
@@ -24,7 +32,9 @@ public class Subtask extends Task {
                 getName(),
                 getStatus().toString(),
                 getDescription(),
-                Integer.toString(getEpicId())};
+                Integer.toString(getEpicId()),
+                String.valueOf(getDuration().toMinutes()),
+                String.valueOf(getStartTime())};
         return String.join(",", string);
     }
 
@@ -51,6 +61,9 @@ public class Subtask extends Task {
                 ", name='" + getName() + '\'' +
                 ", description='" + getDescription() + '\'' +
                 ", status='" + getStatus() + '\'' +
+                ", duration=" + getDuration() + '\'' +
+                ", startTime=" + getStartTime() + '\'' +
+                ", endTime=" + getEndTime() + '\'' +
                 '}';
     }
 }

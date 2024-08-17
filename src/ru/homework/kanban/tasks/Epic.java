@@ -1,11 +1,13 @@
 package ru.homework.kanban.tasks;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class Epic extends Task {
     protected List<Integer> subtaskIds = new ArrayList<>();
+    protected LocalDateTime endTime;
 
     public Epic(int id, String name, String description) {
         super(id, name, description, TaskStatus.NEW);
@@ -37,6 +39,15 @@ public class Epic extends Task {
     }
 
     @Override
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -54,6 +65,9 @@ public class Epic extends Task {
                 ", description='" + getDescription() + '\'' +
                 ", status='" + getStatus() + '\'' +
                 ", subtaskIds=" + subtaskIds +
+                ", duration=" + getDuration() + '\'' +
+                ", startTime=" + getStartTime() + '\'' +
+                ", endTime=" + endTime + '\'' +
                 '}';
     }
 }

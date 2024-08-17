@@ -5,12 +5,14 @@ import ru.homework.kanban.tasks.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 public class FileBackedTaskManager extends InMemoryTaskManager {
 
 
     private File file = new File("resources", "backupTasks.csv");
-    private static final String HEADER_CSV_FILE = "id,type,name,status,description,epic\n";
+    private static final String HEADER_CSV_FILE = "id,type,name,status,description,epic,duration,startTime\n";
 
     public FileBackedTaskManager(HistoryManager historyManager) {
         super(historyManager);
@@ -39,9 +41,11 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
                 switch (task.getType()) {
                     case TASK:
                         manager.tasks.put(task.getId(), task);
+                        manager.addToPrioritizedTasks(task);
                         break;
                     case SUBTASK:
                         manager.subtasks.put(task.getId(), (Subtask) task);
+                        manager.addToPrioritizedTasks(task);
                         break;
                     case EPIC:
                         manager.epics.put(task.getId(), (Epic) task);
@@ -53,6 +57,9 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         }
         for (Subtask st : manager.subtasks.values()) {
             manager.epics.get(st.getEpicId()).addSubtaskId(st.getId());
+        }
+        for (Epic epic : manager.epics.values()) {
+            manager.changeEpicTiming(epic);
         }
         manager.counterId = (maxID);
         return manager;
@@ -93,6 +100,9 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
         TaskStatus status = TaskStatus.valueOf(file[3].toUpperCase());
         String description = file[4];
         Integer subsEpic = null;
+        Duration duration = Duration.ofMinutes(Long.parseLong(file[6]));
+        LocalDateTime startTime = LocalDateTime.parse(file[7]);
+
         if (type.equals("SUBTASK")) {
             subsEpic = Integer.parseInt(file[5]);
         }
@@ -102,11 +112,11 @@ public class FileBackedTaskManager extends InMemoryTaskManager {
             epic.setStatus(status);
             return epic;
         } else if (type.equals("SUBTASK")) {
-            Subtask subtask = new Subtask(id, title, description, status, subsEpic);
+            Subtask subtask = new Subtask(id, title, description, status, subsEpic, duration, startTime);
             subtask.setId(id);
             return subtask;
         } else {
-            Task task = new Task(id, title, description, status);
+            Task task = new Task(id, title, description, status, duration, startTime);
             task.setId(id);
             return task;
         }
