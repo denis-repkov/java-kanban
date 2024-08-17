@@ -22,17 +22,26 @@ class FileBackedTaskManagerTest {
     @Test
     @DisplayName("Сохраненные и загруженные задачи/эпики/подзадачи одинаковые")
     public void saveAndLoadedTaskAreEqual() {
-        LocalDateTime now = LocalDateTime.now();
-        int taskId = manager.addNewTask(new Task(" ", " ", TaskStatus.NEW, Duration.ofMinutes(0), now));
+        int taskId = manager.addNewTask(new Task(" ", " ", TaskStatus.NEW, Duration.ofMinutes(0), LocalDateTime.now()));
         manager.getTask(taskId);
         int epicId = manager.addNewEpic(new Epic(" ", " "));
         manager.getEpic(epicId);
-        int subtaskId = manager.addNewSubtask(new Subtask(" ", " ", TaskStatus.NEW, 2, Duration.ofMinutes(0), now.plusMinutes(1)));
+        int subtaskId = manager.addNewSubtask(new Subtask(" ", " ", TaskStatus.NEW, 2, Duration.ofMinutes(0), LocalDateTime.now()));
         manager.getSubtask(subtaskId);
         loadedManager = FileBackedTaskManager.loadFromFile(new File("resources/backupTasks.csv"));
         assertEquals(manager.getTask(taskId), loadedManager.getTask(taskId), "Задачи не одинаковы");
         assertEquals(manager.getSubtask(subtaskId), loadedManager.getSubtask(subtaskId), "Подзадачи не одинаковы");
-        assertEquals(manager.getEpic(epicId), loadedManager.getEpic(epicId), "Эпики не одинаковы");
+        // Сравнение эпиков
+        Epic savedEpic = (Epic) manager.getEpic(epicId);
+        Epic loadedEpic = (Epic) loadedManager.getEpic(epicId);
+        assertEquals(savedEpic.getId(), loadedEpic.getId(), "ID эпиков не совпадают");
+        assertEquals(savedEpic.getName(), loadedEpic.getName(), "Названия эпиков не совпадают");
+        assertEquals(savedEpic.getDescription(), loadedEpic.getDescription(), "Описания эпиков не совпадают");
+        assertEquals(savedEpic.getStatus(), loadedEpic.getStatus(), "Статусы эпиков не совпадают");
+        assertEquals(savedEpic.getSubtaskIds(), loadedEpic.getSubtaskIds(), "Списки подзадач эпиков не совпадают");
+        assertEquals(savedEpic.getDuration(), loadedEpic.getDuration(), "Продолжительность эпиков не совпадает");
+        assertEquals(savedEpic.getStartTime(), loadedEpic.getStartTime(), "Дата/время начала эпиков не совпадает");
+
         assertEquals(manager.getPrioritizedTasks(), loadedManager.getPrioritizedTasks(), "Списки приоритетов не одинаковы");
     }
 
