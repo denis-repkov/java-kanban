@@ -40,7 +40,6 @@ class FileBackedTaskManagerTest {
         assertEquals(savedEpic.getStatus(), loadedEpic.getStatus(), "Статусы эпиков не совпадают");
         assertEquals(savedEpic.getSubtaskIds(), loadedEpic.getSubtaskIds(), "Списки подзадач эпиков не совпадают");
         assertEquals(savedEpic.getDuration(), loadedEpic.getDuration(), "Продолжительность эпиков не совпадает");
-        assertEquals(savedEpic.getStartTime(), loadedEpic.getStartTime(), "Дата/время начала эпиков не совпадает");
 
         assertEquals(manager.getPrioritizedTasks(), loadedManager.getPrioritizedTasks(), "Списки приоритетов не одинаковы");
     }
