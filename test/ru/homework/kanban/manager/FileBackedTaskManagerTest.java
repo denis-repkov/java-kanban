@@ -59,11 +59,16 @@ class FileBackedTaskManagerTest {
     @Test
     @DisplayName("Задача с пустой датой начала первая в списке приоритетов")
     public void nullDateStartOneInListPriority() {
+        manager.deleteAllTasks();
+        manager.deleteAllEpics();
         manager.addNewTask(new Task(" ", " ", TaskStatus.NEW, Duration.ofMinutes(0), LocalDateTime.now().plusHours(1)));
         int taskId = manager.addNewTask(new Task(" ", " ", TaskStatus.NEW, Duration.ofMinutes(0), null));
 
         List<Task> prioritizedTasks = manager.getPrioritizedTasks();
 
         assertEquals(taskId, prioritizedTasks.get(0).getId(), "Задача с пустой датой начала должна быть 1-ой в списке");
+
+        manager.deleteAllTasks();
+        manager.deleteAllEpics();
     }
 }
