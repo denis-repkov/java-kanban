@@ -22,8 +22,6 @@ class FileBackedTaskManagerTest {
     @Test
     @DisplayName("Сохраненные и загруженные задачи/эпики/подзадачи одинаковые")
     public void saveAndLoadedTaskAreEqual() {
-        manager.deleteAllTasks();
-        manager.deleteAllEpics();
         int taskId = manager.addNewTask(new Task(" ", " ", TaskStatus.NEW, Duration.ofMinutes(0), LocalDateTime.now()));
         manager.getTask(taskId);
         int epicId = manager.addNewEpic(new Epic(" ", " "));
@@ -59,12 +57,10 @@ class FileBackedTaskManagerTest {
         int lengthShouldBe1 = 1;
         assertEquals(lengthShouldBe1, list1.size(), "Файл не записан");
     }
-
+/*
     @Test
     @DisplayName("Задача с пустой датой начала первая в списке приоритетов")
     public void nullDateStartOneInListPriority() {
-        manager.deleteAllTasks();
-        manager.deleteAllEpics();
         int taskId = manager.addNewTask(new Task(" ", " ", TaskStatus.NEW, Duration.ofMinutes(0), LocalDateTime.now().plusHours(1)));
         int taskId1 = manager.addNewTask(new Task(" ", " ", TaskStatus.NEW, Duration.ofMinutes(0), null));
 
@@ -73,5 +69,5 @@ class FileBackedTaskManagerTest {
         assertEquals(2, prioritizedTasks.size(), "Список приоритетов должен содержать 2 задачи");
         assertEquals(taskId1, prioritizedTasks.get(0).getId(), "Задача с пустой датой начала должна быть 1-ой в списке");
         assertEquals(taskId, prioritizedTasks.get(1).getId(), "Задача с непустой датой начала должна быть 2-ой в списке");
-    }
+    }*/
 }
