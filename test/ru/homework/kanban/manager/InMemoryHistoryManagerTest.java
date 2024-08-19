@@ -66,4 +66,19 @@ class InMemoryHistoryManagerTest {
 
         assertEquals(lengthShouldBee, history.size(), "В истории сохранен просмотр после удаления");
     }
+
+    @Test
+    @DisplayName("Задача не создаётся при пересечении по времени и отсутствует в истории")
+    public void notCreatedWhenCrossInTimeAndMissingFromHistory() {
+        LocalDateTime now = LocalDateTime.now();
+        int taskId1 = taskManager.addNewTask(new Task(" ", " ", TaskStatus.NEW, Duration.ofMinutes(0), now));
+        int taskId2 = taskManager.addNewTask(new Task(" ", " ", TaskStatus.NEW, Duration.ofMinutes(0), now));
+        taskManager.getTask(taskId1);
+        taskManager.getTask(taskId2);
+
+        int lengthShouldBee = 1;
+
+        assertEquals(lengthShouldBee, taskManager.getTasks().size(), "Задача с пересечением по времени создалась");
+        assertEquals(lengthShouldBee, taskManager.getHistory().size(), "В историю попала задача с пересечением по времени");
+    }
 }

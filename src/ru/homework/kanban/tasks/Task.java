@@ -99,7 +99,7 @@ public class Task {
     }
 
     public LocalDateTime getEndTime() {
-        return startTime.plus(duration);
+        return getStartTime().plus(duration);
     }
 
     public String toFileString() {

@@ -22,15 +22,15 @@ public class Main {
         System.out.println("Проверка начинается!");
         // добавляем задачи/эпики/подзадачи для теста
         taskManager.addNewTask(new Task("Задача-1", "Здесь описание задачи 1", NEW, Duration.ofMinutes(1), now));
-        taskManager.addNewTask(new Task("Задача-2", "Здесь описание задачи 2", NEW, Duration.ofMinutes(1), now.plusMinutes(1)));
+        taskManager.addNewTask(new Task("Задача-2", "Здесь описание задачи 2", NEW, Duration.ofMinutes(1), now.plusMinutes(2)));
         taskManager.addNewEpic(new Epic("Эпик-1", "Здесь описание эпика 1"));
-        taskManager.addNewSubtask(new Subtask("Подзадача-1-1", "Здесь описание подзадачи 1-1", NEW, 3, Duration.ofMinutes(1), now.plusMinutes(2)));
-        taskManager.addNewSubtask(new Subtask("Подзадача-1-2", "Здесь описание подзадачи 1-2", NEW, 3, Duration.ofMinutes(1), now.plusMinutes(3)));
-        taskManager.addNewSubtask(new Subtask("Подзадача-1-3", "Здесь описание подзадачи 1-3", NEW, 3, Duration.ofMinutes(1), now.plusMinutes(4)));
+        taskManager.addNewSubtask(new Subtask("Подзадача-1-1", "Здесь описание подзадачи 1-1", NEW, 3, Duration.ofMinutes(1), now.plusMinutes(4)));
+        taskManager.addNewSubtask(new Subtask("Подзадача-1-2", "Здесь описание подзадачи 1-2", NEW, 3, Duration.ofMinutes(1), now.plusMinutes(6)));
+        taskManager.addNewSubtask(new Subtask("Подзадача-1-3", "Здесь описание подзадачи 1-3", NEW, 3, Duration.ofMinutes(1), now.plusMinutes(8)));
         taskManager.addNewEpic(new Epic("Эпик-2", "Здесь описание эпика 1"));
-        taskManager.addNewSubtask(new Subtask("Подзадача-2-1", "Здесь описание подзадачи 2-1", NEW, 7, Duration.ofMinutes(1), now.plusMinutes(5)));
-        taskManager.addNewSubtask(new Subtask("Подзадача-2-2", "Здесь описание подзадачи 2-2", NEW, 7, Duration.ofMinutes(1), now.plusMinutes(6)));
-        taskManager.addNewSubtask(new Subtask("Подзадача-2-3", "Здесь описание подзадачи 2-3", DONE, 7, Duration.ofMinutes(1), now.plusMinutes(7)));
+        taskManager.addNewSubtask(new Subtask("Подзадача-2-1", "Здесь описание подзадачи 2-1", NEW, 7, Duration.ofMinutes(1), now.plusMinutes(10)));
+        taskManager.addNewSubtask(new Subtask("Подзадача-2-2", "Здесь описание подзадачи 2-2", NEW, 7, Duration.ofMinutes(1), now.plusMinutes(12)));
+        taskManager.addNewSubtask(new Subtask("Подзадача-2-3", "Здесь описание подзадачи 2-3", DONE, 7, Duration.ofMinutes(1), now.plusMinutes(14)));
 
         System.out.println("Выводим в консоль списки всех задач/эпиков/подзадач...");
         System.out.println(taskManager.getTasks());
@@ -66,8 +66,8 @@ public class Main {
         System.out.println(taskManager.getTasks());
 
         System.out.println("\nОбновляем данные по подзадачам и печатаем список подзадач для проверки...");
-        taskManager.updateSubtask(new Subtask(4, "Подзадача-1-1", "Здесь описание подзадачи 1", DONE, 3, Duration.ofMinutes(1), now.plusHours(1).plusMinutes(1)));
-        taskManager.updateSubtask(new Subtask(5, "Подзадача-2-4", "Была 1-2 - стала 2-4", IN_PROGRESS, 7, Duration.ofMinutes(1), now.plusHours(1).plusMinutes(2)));
+        taskManager.updateSubtask(new Subtask(4, "Подзадача-1-1", "Здесь описание подзадачи 1", DONE, 3, Duration.ofMinutes(1), now.plusHours(1).plusMinutes(2)));
+        taskManager.updateSubtask(new Subtask(5, "Подзадача-2-4", "Была 1-2 - стала 2-4", IN_PROGRESS, 7, Duration.ofMinutes(1), now.plusHours(1).plusMinutes(4)));
         System.out.println(taskManager.getSubtasks());
 
         System.out.println("\nВыводим снова список эпиков для проверки...");
