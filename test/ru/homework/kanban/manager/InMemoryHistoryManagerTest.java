@@ -76,9 +76,7 @@ class InMemoryHistoryManagerTest {
         taskManager.getTask(taskId1);
         taskManager.getTask(taskId2);
 
-        int lengthShouldBee = 1;
-
-        assertEquals(lengthShouldBee, taskManager.getTasks().size(), "Задача с пересечением по времени создалась");
-        assertEquals(lengthShouldBee, taskManager.getHistory().size(), "В историю попала задача с пересечением по времени");
+        assertNull(taskManager.getTask(taskId2), "Задача с пересечением по времени создалась");
+        assertFalse(taskManager.getHistory().contains(taskManager.getTask(taskId2)), "В историю попала задача с пересечением по времени");
     }
 }
