@@ -22,6 +22,8 @@ class FileBackedTaskManagerTest {
     @Test
     @DisplayName("Сохраненные и загруженные задачи/эпики/подзадачи одинаковые")
     public void saveAndLoadedTaskAreEqual() {
+        manager.deleteAllTasks();
+        manager.deleteAllEpics();
         int taskId = manager.addNewTask(new Task(" ", " ", TaskStatus.NEW, Duration.ofMinutes(0), LocalDateTime.now()));
         manager.getTask(taskId);
         int epicId = manager.addNewEpic(new Epic(" ", " "));
@@ -71,7 +73,5 @@ class FileBackedTaskManagerTest {
         assertEquals(2, prioritizedTasks.size(), "Список приоритетов должен содержать 2 задачи");
         assertEquals(taskId1, prioritizedTasks.get(0).getId(), "Задача с пустой датой начала должна быть 1-ой в списке");
         assertEquals(taskId, prioritizedTasks.get(1).getId(), "Задача с непустой датой начала должна быть 2-ой в списке");
-        manager.deleteAllTasks();
-        manager.deleteAllEpics();
     }
 }
