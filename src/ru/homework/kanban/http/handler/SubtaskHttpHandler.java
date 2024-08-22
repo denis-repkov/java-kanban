@@ -22,31 +22,32 @@ public class SubtaskHttpHandler extends BaseHttpHandler {
 
         switch (httpExchange.getRequestMethod()) {
             case "POST":
-                InputStream inputStream = httpExchange.getRequestBody();
-                String body = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-                if (!body.isEmpty()) {
-                    Subtask postTask = gson.fromJson(body, Subtask.class);
-                    if (postTask.getId() == 0) {
-                        try {
-                            manager.addNewSubtask(postTask);
-                            writeResponse(httpExchange, "Подзадача создана.", 201);
-                        } catch (ManagerException e) {
-                            sendHasInteractions(httpExchange);
-                        } catch (Exception e) {
-                            sendServerError(httpExchange);
+                try (InputStream inputStream = httpExchange.getRequestBody()) {
+                    String body = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+                    if (!body.isEmpty()) {
+                        Subtask postTask = gson.fromJson(body, Subtask.class);
+                        if (postTask.getId() == 0) {
+                            try {
+                                manager.addNewSubtask(postTask);
+                                writeResponse(httpExchange, "Подзадача создана.", 201);
+                            } catch (ManagerException e) {
+                                sendHasInteractions(httpExchange);
+                            } catch (Exception e) {
+                                sendServerError(httpExchange);
+                            }
+                        } else {
+                            try {
+                                manager.updateSubtask(postTask);
+                                writeResponse(httpExchange, "Подзадача обновлена.", 201);
+                            } catch (ManagerException e) {
+                                sendHasInteractions(httpExchange);
+                            } catch (Exception e) {
+                                sendServerError(httpExchange);
+                            }
                         }
                     } else {
-                        try {
-                            manager.updateSubtask(postTask);
-                            writeResponse(httpExchange, "Подзадача обновлена.", 201);
-                        } catch (ManagerException e) {
-                            sendHasInteractions(httpExchange);
-                        } catch (Exception e) {
-                            sendServerError(httpExchange);
-                        }
+                        throw new RuntimeException("Данные не переданы");
                     }
-                } else {
-                    throw new RuntimeException("Данные не переданы");
                 }
             case "GET":
                 Integer id = getIdFromPath(httpExchange.getRequestURI().getPath());
